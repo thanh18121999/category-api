@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>9</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Xlog.Category.Domain" />
+    <None Remove="UseCases\DeleteProduct %28copy%29\" />
+    <None Remove="UseCases\GetServices\" />
+    <None Remove="UseCases\GetCountries\" />
+    <None Remove="UseCases\GetCities\" />
+    <None Remove="UseCases\AddPartner\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UseCases\DeletePostalCode\" />
+    <Folder Include="UseCases\GetServices\" />
+    <Folder Include="UseCases\GetCountries\" />
+    <Folder Include="UseCases\GetCities\" />
+    <Folder Include="UseCases\AddPartner\" />
+    
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XLog.Category.Domain\XLog.Category.Domain.csproj" />
+  </ItemGroup>
+</Project>
