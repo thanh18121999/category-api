@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using XLog.Category.Infrastructure.UseCases.AddPartner;
 using XLog.Category.Infrastructure.UseCases.DeletePartner;
+using XLog.Category.Infrastructure.UseCases.GetPartner;
 using XLog.Category.Infrastructure.UseCases.GetPartners;
 
 namespace XLog.CategoryApi.Controllers
@@ -15,6 +16,12 @@ namespace XLog.CategoryApi.Controllers
     public class PartnerController : ControllerBase
     {
 
+        [HttpGet("get-partner-by-id")]
+        public async Task<IActionResult> GetPartnerByID([FromQuery] GetPartnerCommand command, [FromServices] IMediator mediator)
+        {
+            var result = await mediator.Send(command);
+            return Ok(result);
+        }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetPartners([FromQuery] GetPartnersCommand command, [FromServices] IMediator mediator)
         {
@@ -22,7 +29,6 @@ namespace XLog.CategoryApi.Controllers
             var result = await mediator.Send(command);
             return Ok(result);
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddPartnerCommand command, [FromServices] IMediator mediator)

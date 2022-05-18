@@ -16,35 +16,16 @@ namespace XLog.CategoryApi.Controllers
     {
 
         [HttpGet("GetByCode")]
-        public async Task<IActionResult> GetWardByCode([FromQuery] GetWardCommand command, [FromServices] IMediator mediator)
+        public async Task<IActionResult> GetByWard_District_City_Country_Code([FromQuery] GetWardCommand command, [FromServices] IMediator mediator)
         {
             var result = await mediator.Send(command);
             return Ok(result);
         }
-
-
-        [HttpGet("GetAllWards")]
-        public async Task<IActionResult> GetAllWards([FromQuery] GetAllWardCommand command, [FromServices] IMediator mediator)
+        [HttpGet("GetAllWardByDistrictCityCountryCode")]
+        public async Task<IActionResult> GetAllByDistrict_City_CountryCode([FromQuery] GetAllWardCommand command, [FromServices] IMediator mediator)
         {
             var result = await mediator.Send(command);
             return Ok(result);
         }
-
-
-        // [HttpPost]
-        // public async Task<IActionResult> Create([FromBody] AddPartnerCommand command, [FromServices] IMediator mediator)
-        // {
-        //     var result = await mediator.Send(command);
-        //     return Ok(result);
-        // }
-
-        // [HttpDelete("{id}")]
-        // public async Task<IActionResult> Delete(Guid id, [FromServices] IMediator mediator)
-        // {
-        //     var result = await mediator.Send(new DeletePartnerCommand { PartnerId = id });
-        //     return Ok(result);
-        //}
-
-
     }
 }

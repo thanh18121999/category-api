@@ -32,9 +32,8 @@ namespace XLog.CategoryApi.Controllers
 
 
         [HttpGet("GetAllCountry")]
-        public async Task<IActionResult> GetAllCountry([FromServices] IMediator mediator)
+        public async Task<IActionResult> GetAllCountry([FromQuery] GetAllCountryCommand command,[FromServices] IMediator mediator)
         {
-            GetAllCountryCommand command = new GetAllCountryCommand();
             var result = await mediator.Send(command);
             return Ok(result);
         }
