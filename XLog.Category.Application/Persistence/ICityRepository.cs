@@ -8,17 +8,17 @@ namespace XLog.Category.Application.Persistence
     public interface ICityRepository
     {
         //void SeedDatabase();
-        void Remove(Domain.CITY postalCode);
+        void Remove(Domain.PROVINCES postalCode);
 
-        void Update(Domain.CITY postalCode);
+        void Update(Domain.PROVINCES postalCode);
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
-        ValueTask AddAsync(Domain.CITY city, CancellationToken cancellationToken);
+        ValueTask AddAsync(Domain.PROVINCES city, CancellationToken cancellationToken);
 
-        ValueTask<IList<Domain.CITY>> GetAllByCountryCode(string countryCode, CancellationToken cancellation);
+        ValueTask<IEnumerable<Domain.PROVINCES?>> GetAllByCountryCode(string countryCode, CancellationToken cancellation);
 
-        ValueTask<Domain.CITY?> GetByCity_Country_Code(string cityCode, string countryCode, CancellationToken cancellationToken);
+        ValueTask<IEnumerable<Domain.PROVINCES?>> GetByCity_Country_Code(string cityCode, string countryCode, CancellationToken cancellationToken);
 
 
 

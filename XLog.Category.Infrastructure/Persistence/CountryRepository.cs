@@ -41,7 +41,7 @@ namespace XLog.Category.Infrastructure.Persistence
             await _country.AddAsync(country, cancellationToken);
         } 
 
-        public async ValueTask<COUNTRY?> GetById(string countryId, CancellationToken cancellationToken)
+        public async ValueTask<COUNTRY?> GetById(int countryId, CancellationToken cancellationToken)
         {
             return await _country
                                 .AsNoTracking()
@@ -55,7 +55,7 @@ namespace XLog.Category.Infrastructure.Persistence
                                 .SingleOrDefaultAsync(x => x.CODE == countryCode, cancellationToken: cancellationToken);
         }   
 
-        public async ValueTask<IList<COUNTRY>> GetAll(CancellationToken cancellation)
+        public async ValueTask<IEnumerable<COUNTRY>> GetAll(CancellationToken cancellation)
         {
             return await _country
                                 .AsNoTracking()

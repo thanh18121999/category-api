@@ -10,7 +10,6 @@ namespace XLog.Category.Application.UseCases.GetWard
         public string CountryCode { get; }
         
     }
-
     public interface IGetAllWard
     {
         public string DistrictCode {get;}

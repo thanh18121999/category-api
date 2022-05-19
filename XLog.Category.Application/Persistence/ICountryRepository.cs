@@ -12,9 +12,9 @@ namespace XLog.Category.Application.Persistence
         void Update(Domain.COUNTRY postalCode);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         ValueTask AddAsync(Domain.COUNTRY country, CancellationToken cancellationToken);
-        ValueTask<Domain.COUNTRY?> GetById(string countryId, CancellationToken cancellationToken);
+        ValueTask<Domain.COUNTRY?> GetById(int countryId, CancellationToken cancellationToken);
         ValueTask<Domain.COUNTRY?> GetByCode(string countryCode, CancellationToken cancellationToken);
-        ValueTask<IList<Domain.COUNTRY>> GetAll(CancellationToken cancellation);
+        ValueTask<IEnumerable<Domain.COUNTRY>> GetAll(CancellationToken cancellation);
 
     }
 }

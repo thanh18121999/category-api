@@ -1,3 +1,4 @@
+using System.Net;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,9 +27,7 @@ namespace XLog.Category.Infrastructure.UseCases.DeletePartner
         public async Task<bool> Handle(DeletePartnerCommand command, CancellationToken cancellationToken)
         {
             _partnerRepository.Remove(new PARTNER { ID = command.PartnerId });
-
             var result = await _partnerRepository.SaveChangesAsync(cancellationToken);
-
             return result > 0;
         }
     }

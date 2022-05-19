@@ -4,13 +4,13 @@ namespace XLog.Category.Infrastructure.Dto
 {
     public class PartnerDto
     {
-        public PartnerDto(Guid partnerId, string fullName)
+        public PartnerDto(string id, string fullName)
         {
-            PartnerId = partnerId;
+            Id = id;
             FullName = fullName;
            
         }
-        public Guid PartnerId { get; set; }
+        public string? Id { get; set; }
         public string? FullName { get; set; }
     }
 }

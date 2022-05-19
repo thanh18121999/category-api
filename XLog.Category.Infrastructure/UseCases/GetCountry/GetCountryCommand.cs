@@ -6,7 +6,7 @@ namespace XLog.Category.Infrastructure.UseCases.GetCountry
 {
     public class GetCountryByIdCommand : IRequest<GetCountryResponse>, IGetCountryById
     {
-        public string CountryId { get; set; }
+        public int CountryId { get; set; }
     }
     public class GetCountryByCodeCommand : IRequest<GetCountryResponse>, IGetCountryByCode
     {

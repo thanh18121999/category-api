@@ -16,7 +16,6 @@ namespace XLog.Category.Infrastructure.UseCases.GetDistrict
                .NotNull();
         }
     }
-
     public class GetAllDistrictValidator : AbstractValidator<GetAllDistrictCommand>
     {
         public GetAllDistrictValidator()

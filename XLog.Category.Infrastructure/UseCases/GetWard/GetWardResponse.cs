@@ -1,16 +1,22 @@
+using System.Net;
 using System.Collections.Generic;
 using XLog.Category.Domain;
 using XLog.Category.Infrastructure.Dto;
+using XLog.Category.Application.Persistence;
 
 namespace XLog.Category.Infrastructure.UseCases.GetWard
 {
-    public class GetWardResponse
+    public class GetWardResponse : BaseResponseList<WARDS>
     {
-        public Ward Ward { get; set; } 
+        public string message { get; set; } 
+        public HttpStatusCode StatusCode { get; set; } 
+        public IEnumerable<WARDS> responses { get; set; } 
     }
 
-    public class GetAllWardResponse
+    public class GetAllWardResponse : BaseResponseList<WARDS>
     {
-        public IEnumerable<Ward> Wards { get; set; } 
+        public string message { get; set; } 
+        public HttpStatusCode StatusCode { get; set; } 
+        public IEnumerable<WARDS> responses { get; set; } 
     }
 }

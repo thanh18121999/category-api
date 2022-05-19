@@ -7,7 +7,7 @@ namespace XLog.Category.Infrastructure.Dto
     {
         public CityMappingProfile()
         {
-            CreateMap<CITY, CityDto>();
+            CreateMap<PROVINCES, CityDto>();
 
         }
     }

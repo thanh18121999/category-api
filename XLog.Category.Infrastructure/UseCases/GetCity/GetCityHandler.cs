@@ -25,14 +25,23 @@ namespace XLog.Category.Infrastructure.UseCases.GetCity
 
         public async Task<GetCityResponse> Handle(GetCityCommand command, CancellationToken cancellationToken)
         {
-            var city = await _cityRepository.GetByCity_Country_Code(command.CityCode, command.CountryCode, cancellationToken);
+            try {
+                var citycode = await _cityRepository.GetByCity_Country_Code(command.CityCode, command.CountryCode, cancellationToken);
 
-            var result = new GetCityResponse
-            {
-                city = _mapper.Map<CITY>(city)
-            };
-
-            return result;
+                return new GetCityResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                    responses = _mapper.Map<IEnumerable<PROVINCES>>(citycode)
+                };
+            }
+            catch {
+                return new GetCityResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
+                };
+            }
         }
     }
 
@@ -49,14 +58,23 @@ namespace XLog.Category.Infrastructure.UseCases.GetCity
 
         public async Task<GetAllCityResponse> Handle(GetAllCityByCountryCodeCommand command, CancellationToken cancellationToken)
         {
-            var city = await _cityRepository.GetAllByCountryCode(command.CountryCode, cancellationToken);
+            try {
+                var cities = await _cityRepository.GetAllByCountryCode(command.CountryCode, cancellationToken);
 
-            var result = new GetAllCityResponse
-            {
-                cities = _mapper.Map<IEnumerable<CityDto>>(city)
-            };
-
-            return result;
+                return new GetAllCityResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                    responses = _mapper.Map<IEnumerable<PROVINCES>>(cities)
+                };
+            }
+            catch {
+                return new GetAllCityResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
+                };
+            }
         }
 
          

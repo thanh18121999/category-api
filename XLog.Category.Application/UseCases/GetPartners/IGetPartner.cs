@@ -6,6 +6,5 @@ namespace XLog.Category.Application.UseCases.GetPartners
     {
         public string PartnerId { get; }
 
-       
     }
 }

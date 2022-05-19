@@ -25,14 +25,23 @@ namespace XLog.Category.Infrastructure.UseCases.GetCountry
 
         public async Task<GetCountryResponse> Handle(GetCountryByIdCommand command, CancellationToken cancellationToken)
         {
-            var country = await _countryRepository.GetById(command.CountryId, cancellationToken);
+            try {
+                var country = await _countryRepository.GetById(command.CountryId, cancellationToken);
 
-            var result = new GetCountryResponse
-            {
-                country = _mapper.Map<COUNTRY>(country)
-            };
-
-            return result;
+                return new GetCountryResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                    responses = _mapper.Map<COUNTRY>(country)
+                };
+            }
+            catch {
+                return new GetCountryResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
+                }; 
+            }
         }  
     }
 
@@ -49,14 +58,23 @@ namespace XLog.Category.Infrastructure.UseCases.GetCountry
 
         public async Task<GetCountryResponse> Handle(GetCountryByCodeCommand command, CancellationToken cancellationToken)
         {
-            var country = await _countryRepository.GetByCode(command.CountryCode, cancellationToken);
+            try {
+                var country = await _countryRepository.GetByCode(command.CountryCode, cancellationToken);
 
-            var result = new GetCountryResponse
-            {
-                country = _mapper.Map<COUNTRY>(country)
-            };
-
-            return result;
+                return new GetCountryResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                    responses = _mapper.Map<COUNTRY>(country)
+                };
+            }
+            catch {
+                return new GetCountryResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
+                };
+            }
         }
 
     }
@@ -73,15 +91,24 @@ namespace XLog.Category.Infrastructure.UseCases.GetCountry
 
         public async Task<GetAllCountryResponse> Handle(GetAllCountryCommand command, CancellationToken cancellationToken)
         {
-            var country = await _countryRepository.GetAll(cancellationToken);
+            try {
+                var country = await _countryRepository.GetAll(cancellationToken);
 
-            var result = new GetAllCountryResponse
-            {
-                countries = _mapper.Map<IEnumerable<CountryDto>>(country),
+                return new GetAllCountryResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                    responses = _mapper.Map<IEnumerable<CountryDto>>(country),
+                };
+            }
+            catch {
+                return new GetAllCountryResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
 
-            };
-
-            return result;
+                };
+            }
         }
 
     }

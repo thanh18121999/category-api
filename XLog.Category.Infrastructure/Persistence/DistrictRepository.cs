@@ -12,23 +12,33 @@ namespace XLog.Category.Infrastructure.Persistence
     public class DistrictRepository : IDistrictRepository
     {
         private readonly AppDbContext _categoryDbContext;
-        private readonly DbSet<DISTRICT> _district;
+        private readonly DbSet<DISTRICTS> _district;
+        private readonly DbSet<COUNTRY> _country;
+        private readonly DbSet<PROVINCES> _provinces;
+        private readonly DbSet<WARDS> _wards;
         private readonly ICityRepository _city;
+        private readonly ICountryRepository _countries;
+        // private readonly IWardRepository _ward;
 
-        public DistrictRepository(AppDbContext categoryDbContext, ICityRepository cityRepository)
+        public DistrictRepository(AppDbContext categoryDbContext, ICityRepository cityRepository,ICountryRepository countryRepository)
         {
             _categoryDbContext = categoryDbContext;
-            _district = _categoryDbContext.Set<DISTRICT>();
+            _district = _categoryDbContext.Set<DISTRICTS>();
+            _provinces = _categoryDbContext.Set<PROVINCES>();
+            _country = _categoryDbContext.Set<COUNTRY>();
+            _wards = _categoryDbContext.Set<WARDS>();
             _city = cityRepository;
+            _countries = countryRepository;
+            // _ward = wardRepository;
 
         }
 
-        public void Remove(DISTRICT district)
+        public void Remove(DISTRICTS district)
         {
             _district.Remove(district);
         }
 
-        public void Update(DISTRICT district)
+        public void Update(DISTRICTS district)
         {
             _district.Update(district);
         }
@@ -38,40 +48,34 @@ namespace XLog.Category.Infrastructure.Persistence
             return await _categoryDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async ValueTask AddAsync(DISTRICT district, CancellationToken cancellationToken)
+        public async ValueTask AddAsync(DISTRICTS district, CancellationToken cancellationToken)
         {
             await _district.AddAsync(district, cancellationToken);
         }
 
-        public async ValueTask<Domain.DISTRICT> GetByDistrict_City_Country_Code(string districtCode,string cityCode, string countryCode,CancellationToken cancellation)
+        public async ValueTask<IEnumerable<Domain.DISTRICTS?>> GetByDistrict_City_Country_Code(string districtCode,string cityCode, string countryCode,CancellationToken cancellationToken)
         {
-            try {
-                CITY target_city =  await _city.GetByCity_Country_Code(cityCode,countryCode,cancellation);
-                if (target_city != null) {
-                    return await _district
-                                        .SingleOrDefaultAsync(d => d.CODE == districtCode && d.ID == target_city.ID, cancellationToken: cancellation);
-                }
-                else {
-                    return new DISTRICT();
-                }
+                    return await _categoryDbContext.DISTRICTS.Join(_categoryDbContext.PROVINCES,districts => districts.PROVINCEID,provinces => provinces.ID,  (districts,provinces) =>
+                                                new {Districts = districts,Provinces = provinces })
+                                                .Join(_categoryDbContext.COUNTRY, DP => DP.Provinces.COUNTRYID, country => country.ID,(DP,country) 
+                                                => new { DistrictsProvinces = DP, Country = country})
+                                                .Where(result => result.DistrictsProvinces.Districts.CODE == districtCode)
+                                                .Where(result => result.DistrictsProvinces.Provinces.CODE == cityCode)
+                                                .Where(result => result.Country.CODE == countryCode)
+                                                .Select(x => x.DistrictsProvinces.Districts)
+                                                .ToListAsync(cancellationToken);
 
-
-            }
-            catch (Exception)
-            {
-                    return new DISTRICT();
-            }
         }
-
-        public async ValueTask<IList<DISTRICT>> GetAllByCity_CountryCode(string cityCode, string countryCode,CancellationToken cancellation)
+        public async ValueTask<IEnumerable<Domain.DISTRICTS?>> GetAllByCity_CountryCode(string cityCode, string countryCode,CancellationToken cancellation)
         {
-            CITY result =  await _city.GetByCity_Country_Code(cityCode,countryCode,cancellation);
-
-            
-            return await _district
-                            .AsNoTracking()
-                            .Where(c=>c.ID == result.ID)
-                            .ToListAsync(cancellation);
+            return await _categoryDbContext.DISTRICTS.Join(_categoryDbContext.PROVINCES,districts => districts.PROVINCEID,provinces => provinces.ID,  (districts,provinces) =>
+                                                new {Districts = districts,Provinces = provinces })
+                                                .Join(_categoryDbContext.COUNTRY, DP => DP.Provinces.COUNTRYID, country => country.ID,(DP,country) 
+                                                => new { DistrictsProvinces = DP, Country = country})
+                                                .Where(result => result.DistrictsProvinces.Provinces.CODE == cityCode)
+                                                .Where(result => result.Country.CODE == countryCode)
+                                                .Select(x => x.DistrictsProvinces.Districts)
+                                                .ToListAsync(cancellation);
         }
 
        

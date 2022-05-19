@@ -19,4 +19,11 @@ namespace XLog.Category.Infrastructure.UseCases.GetCountry
                .NotNull();
         }
     }
+
+    public class GetAllCountryValidator : AbstractValidator<GetAllCountryCommand>
+    {
+        public GetAllCountryValidator()
+        {
+        }
+    }
 }

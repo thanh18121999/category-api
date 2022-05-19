@@ -39,10 +39,5 @@ namespace XLog.Category.Infrastructure.Persistence
         {
             await _postalCode.AddAsync(PostalCode, cancellationToken);
         }
-
-      
-
-
-       
     }
 }

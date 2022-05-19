@@ -1,0 +1,15 @@
+using System.Net;
+using System.Collections.Generic;
+using XLog.Category.Domain;
+using XLog.Category.Infrastructure.Dto;
+using XLog.Category.Application.Persistence;
+
+namespace XLog.Category.Infrastructure.UseCases.AddPartner
+{
+    public class AddPartnerResponse : BaseResponse<PartnerDto>
+    {
+        public string message { get; set; } 
+        public HttpStatusCode StatusCode { get; set; } 
+        public PartnerDto responses { get; set; } 
+    }
+}

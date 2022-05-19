@@ -5,6 +5,15 @@ namespace XLog.Category.Infrastructure.Persistence
     public sealed class AppDbContext : DbContext
     {
         public DbSet<Domain.PARTNER> PARTNERS { get; set; }
+        public DbSet<Domain.COUNTRY> COUNTRY { get; set; }
+        public DbSet<Domain.PARTNERTYPE> PARTNERTYPE { get; set; }
+        public DbSet<Domain.MERCHANDISETYPE> MERCHANDISETYPE { get; set; }
+        public DbSet<Domain.EXTRASERVICE> EXTRASERVICE { get; set; }
+        public DbSet<Domain.PROVINCES> PROVINCES { get; set; }
+        public DbSet<Domain.DISTRICTS> DISTRICTS { get; set; }
+        public DbSet<Domain.WARDS> WARDS { get; set; }
+        public DbSet<Domain.POSTALCODE> POSTALCODE { get; set; }
+        public DbSet<Domain.DELIVERYSTATES> DELIVERYSTATES { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
         {

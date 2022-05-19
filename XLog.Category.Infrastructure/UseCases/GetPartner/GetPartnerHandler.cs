@@ -26,14 +26,24 @@ namespace XLog.Category.Infrastructure.UseCases.GetPartner
 
         public async Task<GetPartnerResponse> Handle(GetPartnerCommand command, CancellationToken cancellationToken)
         {
-            var partner = await _partnerRepository.GetAsync(command.PartnerId, cancellationToken);
+            try {
+                var responses = await _partnerRepository.GetAsync(command.PartnerId, cancellationToken);
 
-            var result = new GetPartnerResponse
-            {
-                Partner = _mapper.Map<PARTNER>(partner)
-            };
-
-            return result;
+                return new GetPartnerResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                    responses = _mapper.Map<PARTNER>(responses)
+                };
+            }
+            catch {
+                return new GetPartnerResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
+                };
+            }
+            
         }
     }
 }
