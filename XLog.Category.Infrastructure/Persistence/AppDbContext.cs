@@ -14,6 +14,7 @@ namespace XLog.Category.Infrastructure.Persistence
         public DbSet<Domain.WARDS> WARDS { get; set; }
         public DbSet<Domain.POSTALCODE> POSTALCODE { get; set; }
         public DbSet<Domain.DELIVERYSTATES> DELIVERYSTATES { get; set; }
+        public DbSet<Domain.USERGROUPS> USERGROUPS { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
         {

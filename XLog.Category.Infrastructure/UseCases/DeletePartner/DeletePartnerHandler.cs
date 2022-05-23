@@ -13,7 +13,7 @@ using XLog.Category.Infrastructure.UseCases.DeletePartner;
 
 namespace XLog.Category.Infrastructure.UseCases.DeletePartner
 {
-    public class DeletePartnersHandler : IRequestHandler<DeletePartnerCommand, bool>
+    public class DeletePartnersHandler : IRequestHandler<DeletePartnerCommand, DeletePartnerResponse>
     {
         private readonly IPartnerRepository _partnerRepository;
         private readonly IMapper _mapper;
@@ -24,11 +24,23 @@ namespace XLog.Category.Infrastructure.UseCases.DeletePartner
             _mapper = mapper;
         }
 
-        public async Task<bool> Handle(DeletePartnerCommand command, CancellationToken cancellationToken)
+        public async Task<DeletePartnerResponse> Handle(DeletePartnerCommand command, CancellationToken cancellationToken)
         {
-            _partnerRepository.Remove(new PARTNER { ID = command.PartnerId });
-            var result = await _partnerRepository.SaveChangesAsync(cancellationToken);
-            return result > 0;
+            try {
+                _partnerRepository.Remove(new PARTNER { ID = command.PartnerId });
+                var result = await _partnerRepository.SaveChangesAsync(cancellationToken);
+                return new DeletePartnerResponse {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                };
+            }
+            catch {
+                return new DeletePartnerResponse {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
+                }; 
+            }
+            
         }
     }
 }

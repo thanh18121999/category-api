@@ -13,7 +13,7 @@ using XLog.Category.Infrastructure.UseCases.AddPartner;
 
 namespace XLog.Category.Infrastructure.UseCases.AddPartner
 {
-    public class AddPartnerHandler : IRequestHandler<AddPartnerCommand, PartnerDto>
+    public class AddPartnerHandler : IRequestHandler<AddPartnerCommand, AddPartnerResponse>
     {
         private readonly IPartnerRepository _partnerRepository;
         private readonly IMapper _mapper;
@@ -24,14 +24,26 @@ namespace XLog.Category.Infrastructure.UseCases.AddPartner
             _mapper = mapper;
         }
 
-        public async Task<PartnerDto> Handle(AddPartnerCommand command, CancellationToken cancellationToken)
+        public async Task<AddPartnerResponse> Handle(AddPartnerCommand command, CancellationToken cancellationToken)
         {
-            var itemFromCommand = _mapper.Map<PARTNER>(command);
+            try {
+                var responses = _mapper.Map<PARTNER>(command);
 
-            await _partnerRepository.AddAsync(itemFromCommand, cancellationToken);
-            await _partnerRepository.SaveChangesAsync(cancellationToken);
-
-            return _mapper.Map<PartnerDto>(itemFromCommand);
+                await _partnerRepository.AddAsync(responses, cancellationToken);
+                await _partnerRepository.SaveChangesAsync(cancellationToken);
+                return new AddPartnerResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                };
+            }
+            catch {
+                return new AddPartnerResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
+                };
+            }
         }
     }
 }
