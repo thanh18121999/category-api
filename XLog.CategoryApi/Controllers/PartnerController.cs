@@ -37,7 +37,7 @@ namespace XLog.CategoryApi.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete Partner By ID")]
         public async Task<IActionResult> Delete(string id, [FromServices] IMediator mediator)
         {
             var result = await mediator.Send(new DeletePartnerCommand { PartnerId = id });
