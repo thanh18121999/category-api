@@ -33,7 +33,7 @@ namespace XLog.Category.Infrastructure.UseCases.GetPartner
                 {
                     StatusCode = System.Net.HttpStatusCode.OK,
                     message = "Success",
-                    responses = _mapper.Map<PARTNER>(responses)
+                    responses = _mapper.Map<PARTNERS>(responses)
                 };
             }
             catch {

@@ -6,10 +6,10 @@ using XLog.Category.Application.Persistence;
 
 namespace XLog.Category.Infrastructure.UseCases.AddPartner
 {
-    public class AddPartnerResponse : BaseResponse<PartnerDto>
+    public class AddPartnerResponse : BaseResponse<PARTNERS>
     {
         public string message { get; set; } 
         public HttpStatusCode StatusCode { get; set; } 
-        public PartnerDto responses { get; set; } 
+        public PARTNERS responses { get; set; } 
     }
 }

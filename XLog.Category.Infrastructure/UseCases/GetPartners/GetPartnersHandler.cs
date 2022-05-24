@@ -14,10 +14,10 @@ namespace XLog.Category.Infrastructure.UseCases.GetPartners
     public class GetPartnersHandler : IRequestHandler<GetPartnersCommand, GetPartnersResponse>
     {
         //private readonly IPartnerRepository _partnerRepository;
-        private readonly IRepository<PARTNER> _partnerRepository;
+        private readonly IRepository<PARTNERS> _partnerRepository;
         private readonly IMapper _mapper;
 
-        public GetPartnersHandler(IRepository<PARTNER> partnerRepository, IMapper mapper)
+        public GetPartnersHandler(IRepository<PARTNERS> partnerRepository, IMapper mapper)
         {
             _partnerRepository = partnerRepository;
             _mapper = mapper;

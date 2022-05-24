@@ -4,7 +4,7 @@ namespace XLog.Category.Infrastructure.Persistence
 {
     public sealed class AppDbContext : DbContext
     {
-        public DbSet<Domain.PARTNER> PARTNERS { get; set; }
+        public DbSet<Domain.PARTNERS> PARTNERS { get; set; }
         public DbSet<Domain.COUNTRY> COUNTRY { get; set; }
         public DbSet<Domain.PARTNERTYPE> PARTNERTYPE { get; set; }
         public DbSet<Domain.MERCHANDISETYPE> MERCHANDISETYPE { get; set; }

@@ -13,21 +13,21 @@ namespace XLog.Category.Infrastructure.Persistence
     public class PartnerRepository : IPartnerRepository
     {
         private readonly AppDbContext _categoryDbContext;
-        private readonly DbSet<PARTNER> _partners;
+        private readonly DbSet<PARTNERS> _partners;
 
 
         public PartnerRepository(AppDbContext categoryDbContext)
         {
             _categoryDbContext = categoryDbContext;
-            _partners = _categoryDbContext.Set<PARTNER>();
+            _partners = _categoryDbContext.Set<PARTNERS>();
         }
 
-        public void Remove(PARTNER partner)
+        public void Remove(PARTNERS partner)
         {
             _partners.Remove(partner);
         }
 
-        public void Update(PARTNER partner)
+        public void Update(PARTNERS partner)
         {
             _partners.Update(partner);
         }
@@ -37,12 +37,12 @@ namespace XLog.Category.Infrastructure.Persistence
             return await _categoryDbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async ValueTask<PARTNER?> GetAsync(string id, CancellationToken cancellationToken)
+        public async ValueTask<PARTNERS?> GetAsync(string id, CancellationToken cancellationToken)
         {
             return await _partners.SingleOrDefaultAsync(x => x.ID == id, cancellationToken: cancellationToken);
         }
 
-        public async ValueTask<IList<PARTNER>> GetPartnersAsync(int pageSize, CancellationToken cancellationToken)
+        public async ValueTask<IList<PARTNERS>> GetPartnersAsync(int pageSize, CancellationToken cancellationToken)
         {
             
 
@@ -56,7 +56,7 @@ namespace XLog.Category.Infrastructure.Persistence
         }
 
 
-        public async ValueTask AddAsync(PARTNER partner, CancellationToken cancellationToken)
+        public async ValueTask AddAsync(PARTNERS partner, CancellationToken cancellationToken)
         {
             await _partners.AddAsync(partner, cancellationToken);
         }
@@ -66,7 +66,7 @@ namespace XLog.Category.Infrastructure.Persistence
             return await _partners.CountAsync(cancellationToken);
         }
 
-        public async ValueTask<IList<PARTNER>> SearchAsync(string filter,
+        public async ValueTask<IList<PARTNERS>> SearchAsync(string filter,
                                                                    int pageIndex,
                                                                    int pageSize,
                                                                    CancellationToken cancellation)
