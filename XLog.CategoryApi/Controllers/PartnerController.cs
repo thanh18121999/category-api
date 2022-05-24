@@ -30,7 +30,7 @@ namespace XLog.CategoryApi.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] AddPartnerCommand command, [FromServices] IMediator mediator)
         {
             var result = await mediator.Send(command);

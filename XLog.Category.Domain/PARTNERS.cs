@@ -2,7 +2,7 @@ using System;
 
 namespace XLog.Category.Domain
 {
-    public class PARTNER: BaseEntity<string?>
+    public class PARTNERS: BaseEntity<string?>
     {
         public string ID { get; set; }
         public string? ACCOUNT { get; set; }
@@ -28,4 +28,5 @@ namespace XLog.Category.Domain
         public DateTime SYSTEMTIME { get; set; }
         public int ISACTIVE { get; set; }
     }
+    
 }

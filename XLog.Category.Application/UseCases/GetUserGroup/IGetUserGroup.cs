@@ -20,17 +20,21 @@ namespace XLog.Category.Application.UseCases.GetUserGroup
     {
         public IEnumerable<AddUserGroupItem> userGroupItems {get;}
     }
-    public interface IDeleteUserGroup
+    public class UpdateUserGroupItem
     {
-        public string userGroupID { get; }
+        public string Id { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set;}
+        public string Name2 { get; set;}
+        public string Note { get; set;}
+        public string IsActive { get; set;}
     }
     public interface IUpdateUserGroup
     {
+        public IEnumerable<UpdateUserGroupItem> userGroups {get;}
+    }
+    public interface IDeleteUserGroup
+    {
         public string userGroupID { get; }
-        public string Code { get; }
-        public string Name { get; }
-        public string Name2 { get; }
-        public string Note { get; }
-        public string Active { get; }
     }
 }

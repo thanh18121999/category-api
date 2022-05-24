@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using XLog.Category.Infrastructure.UseCases.GetUserGroup;
 using XLog.Category.Infrastructure.UseCases.AddUserGroup;
 using XLog.Category.Infrastructure.UseCases.DeleteUserGroup;
+using XLog.Category.Infrastructure.UseCases.UpdateUserGroup;
 
 namespace XLog.CategoryApi.Controllers
 {
@@ -28,12 +29,13 @@ namespace XLog.CategoryApi.Controllers
             var result = await mediator.Send(command);
             return Ok(result);
         }
-        // [HttpDelete("Edit")]
-        // public async Task<IActionResult> Delete(string id, [FromServices] IMediator mediator)
-        // {
-        //     var result = await mediator.Send(new DeleteUserGroupCommand { userGroupID = id });
-        //     return Ok(result);
-        // }
+
+        [HttpPost("Edit")]
+        public async Task<IActionResult> Edit([FromBody] UpdateUserGroupCommand command, [FromServices] IMediator mediator)
+        {
+            var result = await mediator.Send(command);
+            return Ok(result);
+        }
 
         [HttpDelete("Delete User Group By ID")]
         public async Task<IActionResult> Delete(string id, [FromServices] IMediator mediator)

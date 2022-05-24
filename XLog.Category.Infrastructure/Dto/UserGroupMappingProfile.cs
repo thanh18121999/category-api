@@ -20,4 +20,12 @@ namespace XLog.Category.Infrastructure.Dto
 
         }
     } 
+    public class UpdateUserGroupMappingProfile : Profile
+    {
+        public UpdateUserGroupMappingProfile()
+        {
+            CreateMap<UpdateUserGroupItem, Domain.USERGROUPS>();
+
+        }
+    } 
 }

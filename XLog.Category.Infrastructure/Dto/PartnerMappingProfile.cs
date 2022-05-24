@@ -1,4 +1,5 @@
 using AutoMapper;
+using XLog.Category.Application.UseCases.AddPartner;
 using XLog.Category.Domain;
 
 namespace XLog.Category.Infrastructure.Dto
@@ -7,8 +8,16 @@ namespace XLog.Category.Infrastructure.Dto
     {
         public PartnerMappingProfile()
         {
-            CreateMap<PARTNER, PartnerDto>();
+            CreateMap<PARTNERS, PartnerDto>();
+
+        }  
+    }
+    public class AddPartnerMappingProfile : Profile
+    {
+        public AddPartnerMappingProfile()
+        {
+            CreateMap<AddPartnerItem, Domain.PARTNERS>();
 
         }
-    }
+    } 
 }

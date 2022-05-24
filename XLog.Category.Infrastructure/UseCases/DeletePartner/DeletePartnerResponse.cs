@@ -6,10 +6,10 @@ using XLog.Category.Application.Persistence;
 
 namespace XLog.Category.Infrastructure.UseCases.DeletePartner
 {
-    public class DeletePartnerResponse : BaseResponse<PARTNER>
+    public class DeletePartnerResponse : BaseResponse<PARTNERS>
     {
         public string message { get; set; } 
         public HttpStatusCode StatusCode { get; set; } 
-        public PARTNER responses { get; set; } 
+        public PARTNERS responses { get; set; } 
     }
 }

@@ -27,7 +27,7 @@ namespace XLog.Category.Infrastructure.UseCases.DeletePartner
         public async Task<DeletePartnerResponse> Handle(DeletePartnerCommand command, CancellationToken cancellationToken)
         {
             try {
-                _partnerRepository.Remove(new PARTNER { ID = command.PartnerId });
+                _partnerRepository.Remove(new PARTNERS { ID = command.PartnerId });
                 var result = await _partnerRepository.SaveChangesAsync(cancellationToken);
                 return new DeletePartnerResponse {
                     StatusCode = System.Net.HttpStatusCode.OK,

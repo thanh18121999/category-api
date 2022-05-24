@@ -29,6 +29,7 @@ namespace XLog.Category.Infrastructure.ServiceCollection
                 .AddTransient<IPartnerTypeRepository, PartnerTypeRepository>()
                 .AddTransient<IMerchandiseTypeRepository, MerchandiseTypeRepository>()
                 .AddTransient<IExtraServiceRepository,ExtraServiceRepository>()
+                .AddTransient<IPostalCodeRepository,PostalCodeRepository>()
                 .AddTransient<IDeliveryStateRepository,DeliveryStateRepository>()
                 .AddTransient<IUserGroupRepository,UserGroupRepository>()
                 .AddScoped(typeof(IRepository<>), typeof(EfRepository<>))

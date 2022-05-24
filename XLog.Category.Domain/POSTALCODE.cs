@@ -6,7 +6,6 @@ namespace XLog.Category.Domain
     {
         public int ID { get; set; }
         public string? CODE { get; set; }
-        public string? NAME { get; set; }
         public int STATUS { get; set; }
         public int COUNTRYID { get; set; }
         public int PROVINCEID { get; set; }
