@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using XLog.Category.Infrastructure.UseCases.AddPartner;
-using XLog.Category.Infrastructure.UseCases.DeletePartner;
 using XLog.Category.Infrastructure.UseCases.GetCity;
 
 namespace XLog.CategoryApi.Controllers
