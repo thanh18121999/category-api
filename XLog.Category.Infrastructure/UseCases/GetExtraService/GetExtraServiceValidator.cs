@@ -10,4 +10,11 @@ namespace XLog.Category.Infrastructure.UseCases.GetExtraService
                .NotNull();
         }
     }
+    public class GetAllExtraServiceValidator : AbstractValidator<GetAllExtraServiceCommand>
+    {
+        public GetAllExtraServiceValidator()
+        {
+            
+        }
+    }
 }

@@ -13,5 +13,6 @@ namespace XLog.Category.Application.Persistence
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         ValueTask AddAsync(Domain.EXTRASERVICE extraservice, CancellationToken cancellationToken);
         ValueTask<Domain.EXTRASERVICE?> GetExtraService (string extraServiceID, CancellationToken cancellationToken);
+        ValueTask<IEnumerable<Domain.EXTRASERVICE?>> GetAll (CancellationToken cancellationToken);
     }
 }

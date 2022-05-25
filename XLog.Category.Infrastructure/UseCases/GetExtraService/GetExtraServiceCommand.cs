@@ -8,4 +8,8 @@ namespace XLog.Category.Infrastructure.UseCases.GetExtraService
     {
         public string ExtraServiceID { get; set; }
     }
+    public class GetAllExtraServiceCommand : IRequest<GetAllExtraServiceResponse>
+    {
+
+    }
 }

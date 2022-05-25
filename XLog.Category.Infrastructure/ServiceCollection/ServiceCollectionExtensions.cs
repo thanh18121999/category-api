@@ -32,6 +32,7 @@ namespace XLog.Category.Infrastructure.ServiceCollection
                 .AddTransient<IPostalCodeRepository,PostalCodeRepository>()
                 .AddTransient<IDeliveryStateRepository,DeliveryStateRepository>()
                 .AddTransient<IUserGroupRepository,UserGroupRepository>()
+                .AddTransient<IDeliveryMethodRepository,DeliveryMethodRepository>()
                 .AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
                 .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddMediatR(Assembly.GetExecutingAssembly())

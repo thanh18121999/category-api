@@ -2,13 +2,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using XLog.Category.Application.Persistence;
 using XLog.Category.Domain;
-using XLog.Category.Infrastructure.Dto;
-using XLog.Category.Infrastructure.Persistence;
-//using XLog.Category.Infrastructure.UseCases.GetPartner;
 
 namespace XLog.Category.Infrastructure.UseCases.GetExtraService
 {
@@ -43,5 +39,39 @@ namespace XLog.Category.Infrastructure.UseCases.GetExtraService
                 };
             }
         }
+    }
+    public class GetAllExtraServiceHandler : IRequestHandler<GetAllExtraServiceCommand, GetAllExtraServiceResponse>
+    {
+        private readonly IExtraServiceRepository _extraServiceRepository;
+        private readonly IMapper _mapper;
+
+        public GetAllExtraServiceHandler(IExtraServiceRepository extraServiceRepository, IMapper mapper)
+        {
+            _extraServiceRepository = extraServiceRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<GetAllExtraServiceResponse> Handle(GetAllExtraServiceCommand command, CancellationToken cancellationToken)
+        {
+            try {
+                var extraservice = await _extraServiceRepository.GetAll(cancellationToken);
+
+                return new GetAllExtraServiceResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                    responses = _mapper.Map<IEnumerable<EXTRASERVICE>>(extraservice),
+                };
+            }
+            catch {
+                return new GetAllExtraServiceResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
+
+                };
+            }
+        }
+
     }
 }
