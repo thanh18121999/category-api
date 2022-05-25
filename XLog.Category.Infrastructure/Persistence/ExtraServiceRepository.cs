@@ -47,5 +47,11 @@ namespace XLog.Category.Infrastructure.Persistence
                                 .AsNoTracking()
                                 .SingleOrDefaultAsync(x => x.ID == extraServiceID, cancellationToken: cancellationToken);
         }
+        public async ValueTask<IEnumerable<EXTRASERVICE?>> GetAll(CancellationToken cancellationToken)
+        {
+            return await _extraService
+                                .AsNoTracking()
+                                .ToListAsync(cancellationToken);
+        }
     }
 }

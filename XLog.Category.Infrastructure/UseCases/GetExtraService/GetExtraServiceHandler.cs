@@ -44,4 +44,38 @@ namespace XLog.Category.Infrastructure.UseCases.GetExtraService
             }
         }
     }
+    public class GetAllExtraServiceHandler : IRequestHandler<GetAllExtraServiceCommand, GetAllExtraServiceResponse>
+    {
+        private readonly IExtraServiceRepository _extraServiceRepository;
+        private readonly IMapper _mapper;
+
+        public GetAllExtraServiceHandler(IExtraServiceRepository extraServiceRepository, IMapper mapper)
+        {
+            _extraServiceRepository = extraServiceRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<GetAllExtraServiceResponse> Handle(GetAllExtraServiceCommand command, CancellationToken cancellationToken)
+        {
+            try {
+                var extraservice = await _extraServiceRepository.GetAll(cancellationToken);
+
+                return new GetAllExtraServiceResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.OK,
+                    message = "Success",
+                    responses = _mapper.Map<IEnumerable<EXTRASERVICE>>(extraservice),
+                };
+            }
+            catch {
+                return new GetAllExtraServiceResponse
+                {
+                    StatusCode = System.Net.HttpStatusCode.InternalServerError,
+                    message = "Error",
+
+                };
+            }
+        }
+
+    }
 }

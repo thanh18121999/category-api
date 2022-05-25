@@ -18,7 +18,11 @@ namespace XLog.CategoryApi.Controllers
             var result = await mediator.Send(command);
             return Ok(result);
         }
-
-
+        [HttpGet("GetAllExtraService")]
+        public async Task<IActionResult> GetAllExtraService([FromQuery] GetAllExtraServiceCommand command,[FromServices] IMediator mediator)
+        {
+            var result = await mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

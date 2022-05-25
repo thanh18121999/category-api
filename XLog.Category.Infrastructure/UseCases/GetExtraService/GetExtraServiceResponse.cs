@@ -12,4 +12,10 @@ namespace XLog.Category.Infrastructure.UseCases.GetExtraService
         public HttpStatusCode StatusCode { get; set; } 
         public EXTRASERVICE responses { get; set; }
     }
+    public class GetAllExtraServiceResponse : BaseResponseList<EXTRASERVICE>
+    {
+        public string message { get; set; } 
+        public HttpStatusCode StatusCode { get; set; } 
+        public IEnumerable<EXTRASERVICE> responses { get; set; } 
+    }
 }
